@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
 }
 
 android {
@@ -70,7 +71,8 @@ dependencies {
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.okhttp)
     implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.compiler)
+    kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.paging)
 
     testImplementation(libs.junit)
