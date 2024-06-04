@@ -17,6 +17,7 @@ coil = "2.2.2"
 koin-android = "3.4.2"
 koin-android-compose = "3.4.5"
 ksp = "1.9.10-1.0.13"
+mockk = "1.13.2"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -48,6 +49,7 @@ androidx-room-testing = { group = "androidx.room", name = "room-testing", versio
 compose-coil-kt = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin-android" }
 koin-android-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin-android-compose" }
+io-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk"}
 
 [bundles]
 koin = [
