@@ -1,46 +1,40 @@
 package com.example.pokedexcompose.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.example.pokedexcompose.ui.activities.DetailsActivity.Companion.DETAILS_ACTIVITY_POKEMON_NAME
+import com.example.pokedexcompose.ui.screens.HomeScreen
 import com.example.pokedexcompose.ui.theme.PokedexComposeTheme
+import org.koin.androidx.compose.getViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             PokedexComposeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+                App(
+                    content = {
+                        HomeScreen(viewModel = getViewModel(), onClickPokemon = {
+                            startActivity(
+                                Intent(this, DetailsActivity::class.java)
+                                    .run { putExtra(DETAILS_ACTIVITY_POKEMON_NAME, it.pokemon.name) })
+                        })
+                    }
+                )
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
+fun App(content: @Composable () -> Unit = {}) {
     PokedexComposeTheme {
-        Greeting("Android")
+        Surface {
+            content()
+        }
     }
 }
