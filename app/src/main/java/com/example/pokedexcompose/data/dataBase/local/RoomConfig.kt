@@ -14,8 +14,16 @@ import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetail
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonRemoteKey
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonSpecies
 
-@Database(entities = [Pokemon::class, EvolutionChain::class, PokemonDetail::class, PokemonRemoteKey::class, PokemonSpecies::class], version = 1, exportSchema = false)
-@TypeConverters(ConverterTypeColoursEnum::class, ConverterPokemonDetailStats::class, ConverterSpecieToEvolution::class)
+@Database(
+    entities = [Pokemon::class, EvolutionChain::class, PokemonDetail::class, PokemonRemoteKey::class, PokemonSpecies::class],
+    version = 1,
+    exportSchema = false
+)
+@TypeConverters(
+    ConverterTypeColoursEnum::class,
+    ConverterPokemonDetailStats::class,
+    ConverterSpecieToEvolution::class
+)
 abstract class RoomConfig : RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDao
