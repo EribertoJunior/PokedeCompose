@@ -1,5 +1,6 @@
 package com.example.pokedexcompose.ui.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -90,13 +91,8 @@ fun HomeScreenView(
     }
 }
 
-@Preview(showBackground = true)
-@Preview("Pokemon List Content - Pixel 2", device = Devices.PIXEL_2)
-@Preview("Pokemon List Content - Pixel 4", device = Devices.PIXEL_4)
-@Preview("Pokemon List Content - Nexus 5", device = Devices.NEXUS_5)
-@Preview("Pokemon List Content - Nexus 6", device = Devices.NEXUS_6)
-@Preview("Pokemon List (big font)", fontScale = 1.5f)
-@Preview("Pokemon List (small screen)", widthDp = 320, heightDp = 480)
+@Preview("Pixel 4", device = Devices.PIXEL_4)
+@Preview("Pixel 4- Dark", device = Devices.PIXEL_4, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PokemonListPreview() {
     PokedexComposeTheme {
