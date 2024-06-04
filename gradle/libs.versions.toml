@@ -15,7 +15,8 @@ okhttp-bom = "4.10.0"
 room = "2.6.1"
 coil = "2.2.2"
 koin-android = "3.4.2"
-koin-android-compose = "3.5.1"
+koin-android-compose = "3.4.5"
+ksp = "1.9.10-1.0.13"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -41,6 +42,7 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 androidx-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 compose-coil-kt = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
@@ -56,4 +58,5 @@ koin = [
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kspRoom = {id = "com.google.devtools.ksp", version.ref = "ksp"}
 
