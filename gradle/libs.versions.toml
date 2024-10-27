@@ -56,6 +56,10 @@ koin = [
     "koin-android",
     "koin-android-compose"
 ]
+retrofit = [
+    "retrofit",
+    "retrofit-converter-gson",
+]
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
