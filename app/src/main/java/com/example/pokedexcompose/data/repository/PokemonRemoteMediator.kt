@@ -237,7 +237,6 @@ class PokemonRemoteMediator(
     }
 
     companion object {
-        const val PAGE_SIZE = 100
         const val OFFSET = 100
     }
 }

@@ -6,7 +6,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.pokedexcompose.data.dataBase.local.PokemonDao
 import com.example.pokedexcompose.data.model.local.PokemonAndDetail
-import com.example.pokedexcompose.data.repository.PokemonRemoteMediator.Companion.PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 
 class HomeRepositoryImpl(
@@ -30,6 +29,7 @@ class HomeRepositoryImpl(
     }
 
     companion object {
+        const val PAGE_SIZE = 100
         private const val PREFETCH_SIZE = 50
         private const val MAX_SIZE = PAGE_SIZE + (PREFETCH_SIZE * 2)
     }
