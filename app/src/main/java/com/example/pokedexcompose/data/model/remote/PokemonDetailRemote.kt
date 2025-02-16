@@ -20,38 +20,7 @@ data class PokemonDetailRemote(
     @SerializedName("height") val height: Int,
     @SerializedName("species") val species: PokemonDetailRemoteSpecies?,
     @SerializedName("stats") val stats: List<PokemonDetailRemoteStats>,
-) {
-    fun mapPokeDetailRemoteToPokeDetail() =
-        PokemonDetail(
-            pokemonDetailId = id,
-            pokemonOwnerId = id,
-            colorTypeList = types.map { dataTypes ->
-                TypeColoursEnum.getTypeFromName(dataTypes.type.name)
-            },
-            weight = weight,
-            height = height,
-            sprites = Sprites(
-                Other(
-                    officialArtwork = OfficialArtwork(sprites.other.officialArtwork.frontDefault),
-                    home = Home(sprites.other.home.frontDefault)
-                )
-            ),
-            species = PokemonDetailSpecies(
-                name = species?.name,
-                url = species?.url
-            ),
-            stats = stats.map { pokemonDetailRemoteStats ->
-                PokemonDetailStats(
-                    baseStat = pokemonDetailRemoteStats.baseStat,
-                    effort = pokemonDetailRemoteStats.effort,
-                    stat = Stat(
-                        name = pokemonDetailRemoteStats.stat.name,
-                        url = pokemonDetailRemoteStats.stat.url
-                    )
-                )
-            }
-        )
-}
+)
 
 data class PokemonDetailRemoteStats(
     @SerializedName("base_stat") val baseStat: Int,
