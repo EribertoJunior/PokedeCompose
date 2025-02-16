@@ -11,6 +11,7 @@ import com.example.pokedexcompose.data.dataBase.local.entities.PokemonRemoteKey
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonSpecies
 import com.example.pokedexcompose.data.dataSource.local.LocalDataSource
 import com.example.pokedexcompose.data.dataSource.remote.RemoteDataSource
+import com.example.pokedexcompose.data.mapper.DataMapper
 import com.example.pokedexcompose.data.model.local.PokemonAndDetail
 import com.example.pokedexcompose.data.model.remote.PokemonDetailRemote
 import com.example.pokedexcompose.data.model.remote.PokemonRemote
@@ -23,7 +24,8 @@ import kotlinx.coroutines.withContext
 @OptIn(ExperimentalPagingApi::class)
 class PokemonRemoteMediator(
     private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
+    private val dataMapper: DataMapper
 ) : RemoteMediator<Int, PokemonAndDetail>() {
 
     override suspend fun load(
@@ -133,7 +135,7 @@ class PokemonRemoteMediator(
                         )
                     )
 
-                    onPokemonDetailsBuilt(mapPokeDetailRemoteToPokeDetail())
+                    onPokemonDetailsBuilt(dataMapper.mapPokeDetailRemoteToPokeDetail())
 
                     onPokemonRemoteKeyBuilt(
                         PokemonRemoteKey(

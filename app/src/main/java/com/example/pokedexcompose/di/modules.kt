@@ -7,6 +7,7 @@ import com.example.pokedexcompose.data.dataSource.local.LocalDataSource
 import com.example.pokedexcompose.data.dataSource.local.LocalDataSourceImpl
 import com.example.pokedexcompose.data.dataSource.remote.RemoteDataSource
 import com.example.pokedexcompose.data.dataSource.remote.RemoteDataSourceImpl
+import com.example.pokedexcompose.data.mapper.DataMapper
 import com.example.pokedexcompose.data.repository.DetailRepository
 import com.example.pokedexcompose.data.repository.DetailRepositoryImpl
 import com.example.pokedexcompose.data.repository.HomeRepository
@@ -58,10 +59,13 @@ val modules = module {
         )
     }
 
+    single { DataMapper() }
+
     factory {
         PokemonRemoteMediator(
             remoteDataSource = get(),
-            localDataSource = get()
+            localDataSource = get(),
+            dataMapper = get()
         )
     }
 
