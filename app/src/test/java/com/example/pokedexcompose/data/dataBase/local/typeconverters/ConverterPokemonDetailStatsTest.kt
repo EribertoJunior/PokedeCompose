@@ -1,4 +1,4 @@
-package com.example.pokedexcompose.data.dataBase.local.converters
+package com.example.pokedexcompose.data.dataBase.local.typeconverters
 
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetailStats
 import com.example.pokedexcompose.data.dataBase.local.entities.Stat

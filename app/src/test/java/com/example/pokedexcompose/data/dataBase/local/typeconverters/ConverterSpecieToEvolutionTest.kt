@@ -1,4 +1,4 @@
-package com.example.pokedexcompose.data.dataBase.local.converters
+package com.example.pokedexcompose.data.dataBase.local.typeconverters
 
 import com.example.pokedexcompose.data.dataBase.local.entities.SpecieToEvolution
 import io.mockk.spyk
@@ -14,7 +14,7 @@ class ConverterSpecieToEvolutionTest {
 
         val jsonArray = "[{\"name\":\"name\",\"imageUrl\":\"/321\"}]"
         val listOf = listOf(
-            SpecieToEvolution(name = "name", imageUrl = "/321")
+            SpecieToEvolution(name = "name", pokemonId = "/321")
         )
 
         run {
@@ -29,7 +29,7 @@ class ConverterSpecieToEvolutionTest {
         val jsonArray = "[{\"name\":\"name\",\"imageUrl\":\"/321\"}]"
 
         val listOf = listOf(
-            SpecieToEvolution(name = "name", imageUrl = "/321")
+            SpecieToEvolution(name = "name", pokemonId = "/321")
         )
 
         run {

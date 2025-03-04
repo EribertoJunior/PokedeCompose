@@ -1,4 +1,4 @@
-package com.example.pokedexcompose.data.dataBase.local
+package com.example.pokedexcompose.data.dataBase.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -11,8 +11,8 @@ interface PokemonRemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveAll(pokemonRemoteKey: List<PokemonRemoteKey>)
 
-    @Query("Select * From PokemonRemoteKey Where pokemonName = :pokemonName")
-    suspend fun getPokemonRemoteKeyFromName(pokemonName: String): PokemonRemoteKey
+    @Query("Select * From PokemonRemoteKey Where id = :pokemonId")
+    suspend fun getPokemonRemoteKeyFromName(pokemonId: Int): PokemonRemoteKey
 
     @Query("Delete From PokemonRemoteKey")
     suspend fun deleteAll()
