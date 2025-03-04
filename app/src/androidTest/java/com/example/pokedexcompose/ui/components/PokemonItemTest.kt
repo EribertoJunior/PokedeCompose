@@ -8,7 +8,7 @@ import androidx.compose.ui.test.printToLog
 import com.example.pokedexcompose.data.dataBase.local.entities.Home
 import com.example.pokedexcompose.data.dataBase.local.entities.OfficialArtwork
 import com.example.pokedexcompose.data.dataBase.local.entities.Other
-import com.example.pokedexcompose.data.dataBase.local.entities.Pokemon
+import com.example.pokedexcompose.data.dataBase.local.entities.PokemonEntity
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetail
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetailSpecies
 import com.example.pokedexcompose.data.dataBase.local.entities.Sprites
@@ -22,9 +22,9 @@ class PokemonItemTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val pokemonAndDetail get() = PokemonAndDetail(
-        pokemon = Pokemon(
-            pokemonId = 10,
+    private val pokemonEntityAndDetail get() = PokemonAndDetail(
+        pokemonEntity = PokemonEntity(
+            id = 10,
             name = "Teste",
             imageUrl = ""
         ),
@@ -53,7 +53,7 @@ class PokemonItemTest {
     fun pokemonItemTest_pokemonImage() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -68,7 +68,7 @@ class PokemonItemTest {
     fun pokemonItemTest_pokemonId() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -83,7 +83,7 @@ class PokemonItemTest {
     fun pokemonItemTest_pokemonName() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -98,7 +98,7 @@ class PokemonItemTest {
     fun pokemonItemTest_pokemonImageType() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -113,7 +113,7 @@ class PokemonItemTest {
     fun pokemonItemTest_secondPokemonImageType() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -128,7 +128,7 @@ class PokemonItemTest {
     fun pokemonItemTest_pokemonTypeName() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -143,7 +143,7 @@ class PokemonItemTest {
     fun pokemonItemTest_secondPokemonTypeName() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -158,7 +158,7 @@ class PokemonItemTest {
     fun pokemonItemTest_imageWeightInKilogram() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -173,7 +173,7 @@ class PokemonItemTest {
     fun pokemonItemTest_valueTextKilogram() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -188,7 +188,7 @@ class PokemonItemTest {
     fun pokemonItemTest_textWeight() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -203,7 +203,7 @@ class PokemonItemTest {
     fun pokemonItemTest_imageHeightInMeters() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -218,7 +218,7 @@ class PokemonItemTest {
     fun pokemonItemTest_valueTextHeight() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 
@@ -233,7 +233,7 @@ class PokemonItemTest {
     fun pokemonItemTest_textHeight() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonAndDetail = pokemonAndDetail
+                pokemonUiData = pokemonEntityAndDetail
             )
         }
 

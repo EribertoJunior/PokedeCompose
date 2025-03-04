@@ -38,7 +38,7 @@ import com.example.pokedexcompose.R
 import com.example.pokedexcompose.data.dataBase.local.entities.Home
 import com.example.pokedexcompose.data.dataBase.local.entities.OfficialArtwork
 import com.example.pokedexcompose.data.dataBase.local.entities.Other
-import com.example.pokedexcompose.data.dataBase.local.entities.Pokemon
+import com.example.pokedexcompose.data.dataBase.local.entities.PokemonEntity
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetail
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetailSpecies
 import com.example.pokedexcompose.data.dataBase.local.entities.Sprites
@@ -47,15 +47,17 @@ import com.example.pokedexcompose.data.model.local.enums.TypeColoursEnum
 import com.example.pokedexcompose.extensions.color
 import com.example.pokedexcompose.extensions.titlecase
 import com.example.pokedexcompose.extensions.toDoubleFormat
+import com.example.pokedexcompose.ui.model.PokemonType
+import com.example.pokedexcompose.ui.model.PokemonUi
 import com.example.pokedexcompose.ui.theme.PokedexComposeTheme
 
 @Composable
 fun PokemonItem(
-    pokemonAndDetail: PokemonAndDetail,
-    onClickPokemon: (PokemonAndDetail) -> Unit = {}
+    pokemonUiData: PokemonUi,
+    onClickPokemon: (Int) -> Unit = {}
 ) {
     Card(
-        modifier = Modifier.clickable { onClickPokemon(pokemonAndDetail) },
+        modifier = Modifier.clickable { onClickPokemon(pokemonUiData.id) },
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
@@ -63,24 +65,25 @@ fun PokemonItem(
             Modifier
                 .fillMaxWidth()
                 .heightIn(min = 150.dp, max = 180.dp)
+                .background(
+                    brush = Brush.horizontalGradient(
+                        pokemonUiData.pokemonTypes
+                            .map { it.colour.codColor.color }
+                            .plus(Color.Transparent)
+                    )
+                )
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth(0.5f)
-                    .background(
-                        brush = Brush.horizontalGradient(
-                            pokemonAndDetail.pokemonDetail.colorTypeList
-                                .map { it.codColor.color }
-                                .plus(Color.Transparent)
-                        )
-                    )
+
             ) {
                 Column(Modifier.align(Center)) {
                     Image(
                         painter = rememberAsyncImagePainter(
                             model = ImageRequest.Builder(LocalContext.current)
-                                .data(pokemonAndDetail.pokemon.imageUrl)
+                                .data(pokemonUiData.imageUrl)
                                 .crossfade(true)
                                 .build(),
                             error = painterResource(
@@ -90,7 +93,7 @@ fun PokemonItem(
                         ),
                         contentDescription = stringResource(
                             R.string.pokemon_image_content_description,
-                            pokemonAndDetail.pokemon.name
+                            pokemonUiData.name
                         ),
                         modifier = Modifier
                             .size(130.dp)
@@ -98,7 +101,7 @@ fun PokemonItem(
                         contentScale = ContentScale.Crop,
                     )
                     Text(
-                        text = pokemonAndDetail.pokemon.idFormatted,
+                        text = pokemonUiData.idFormatted,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier
                             .padding(top = 8.dp)
@@ -112,7 +115,7 @@ fun PokemonItem(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
-                    text = pokemonAndDetail.pokemon.name.titlecase,
+                    text = pokemonUiData.name.titlecase,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
@@ -130,8 +133,8 @@ fun PokemonItem(
                         alignment = CenterHorizontally
                     )
                 ) {
-                    pokemonAndDetail.pokemonDetail.colorTypeList.forEach {
-                        PokemonType(it)
+                    pokemonUiData.pokemonTypes.forEach {
+                        PokemonType(it.colour)
                     }
                 }
 
@@ -143,7 +146,7 @@ fun PokemonItem(
                 ) {
                     PokemonMeasure(
                         formattedMeasure = "${
-                            pokemonAndDetail.pokemonDetail.weight.toDoubleFormat(
+                            pokemonUiData.weight.toDoubleFormat(
                                 2
                             )
                         } kg",
@@ -153,7 +156,7 @@ fun PokemonItem(
                     )
                     PokemonMeasure(
                         formattedMeasure = "${
-                            pokemonAndDetail.pokemonDetail.height.toDoubleFormat(
+                            pokemonUiData.height.toDoubleFormat(
                                 2
                             )
                         } m",
@@ -174,31 +177,23 @@ fun PokemonItemPreview() {
     PokedexComposeTheme {
         Surface {
             PokemonItem(
-                PokemonAndDetail(
-                    pokemon = Pokemon(
-                        pokemonId = 10,
-                        name = "Teste",
-                        imageUrl = ""
-                    ),
-                    pokemonDetail = PokemonDetail(
-                        colorTypeList = listOf(
-                            TypeColoursEnum.DRAGON,
-                            TypeColoursEnum.FIGHTING
+                PokemonUi(
+                    id = 1,
+                    name = "Bulbasaur",
+                    weight = 123,
+                    height = 123,
+                    imageUrl = "",
+                    pokemonTypes = listOf(
+                        PokemonType(
+                            name = "GRASS",
+                            colour = TypeColoursEnum.GRASS
                         ),
-                        sprites = Sprites(
-                            Other(
-                                officialArtwork = OfficialArtwork(""),
-                                home = Home("")
-                            )
-                        ),
-                        weight = 238,
-                        height = 13,
-                        stats = emptyList(),
-                        species = PokemonDetailSpecies(
-                            name = "",
-                            url = ""
+                        PokemonType(
+                            name = "DRAGON",
+                            colour = TypeColoursEnum.FIGHTING
                         )
                     ),
+                    idFormatted = "#0000",
                 )
             )
         }

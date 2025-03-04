@@ -1,28 +1,25 @@
 package com.example.pokedexcompose.data.dataSource.local
 
-import androidx.paging.PagingSource
-import com.example.pokedexcompose.data.dataBase.local.entities.EvolutionChain
-import com.example.pokedexcompose.data.dataBase.local.entities.Pokemon
+import com.example.pokedexcompose.data.dataBase.local.entities.EvolutionChainEntity
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetail
+import com.example.pokedexcompose.data.dataBase.local.entities.PokemonEntity
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonRemoteKey
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonSpecies
 import com.example.pokedexcompose.data.model.local.PokemonAndDetail
 import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
-    fun getPokemons(): PagingSource<Int, PokemonAndDetail>
-
     fun searchPokemonByName(name: String): Flow<PokemonAndDetail>
 
     suspend fun deleteAllPokemon()
 
-    suspend fun saveAllPokemons(pokemons: List<Pokemon>)
+    suspend fun saveAllPokemons(pokemonEntities: List<PokemonEntity>)
 
-    suspend fun savePokemon(pokemon: Pokemon)
+    suspend fun savePokemon(pokemonEntity: PokemonEntity)
 
     suspend fun saveAllRemoteKey(pokemonRemoteKeys: List<PokemonRemoteKey>)
 
-    suspend fun getPokemonRemoteKeyByName(pokemonName: String): PokemonRemoteKey
+    suspend fun getPokemonRemoteKeyById(pokemonId: Int): PokemonRemoteKey
 
     suspend fun deleteAllRemoteKey()
 
@@ -32,9 +29,9 @@ interface LocalDataSource {
 
     suspend fun saveAllPokemonSpecies(species: List<PokemonSpecies> )
 
-    suspend fun saveAllEvolutionChain(evolutionChain: List<EvolutionChain>)
+    suspend fun saveAllEvolutionChain(evolutionChainEntity: List<EvolutionChainEntity>)
 
-    suspend fun saveEvolutionChain(evolutionChain: EvolutionChain)
+    suspend fun saveEvolutionChain(evolutionChainEntity: EvolutionChainEntity)
 
-    fun searchEvolutionChainById(chainId: Int): EvolutionChain?
+    fun searchEvolutionChainById(chainId: Int): EvolutionChainEntity?
 }

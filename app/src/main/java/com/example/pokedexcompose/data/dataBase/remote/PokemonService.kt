@@ -16,8 +16,8 @@ interface PokemonService {
         @Query("offset") offset: Int
     ): ListPokemonRemote
 
-    @GET("pokemon/{name}")
-    suspend fun getPokemonDetails(@Path("name") pokemonName: String) : PokemonDetailRemote
+    @GET("pokemon/{id}")
+    suspend fun getPokemonDetails(@Path("id") pokemonName: Int) : PokemonDetailRemote
 
     @GET
     suspend fun searchPokemonSpecie(@Url pokemonSpecieUrl: String): SpeciesRemote?

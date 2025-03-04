@@ -5,9 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class PokemonRemoteKey(
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0,
-    var pokemonName: String,
+    @PrimaryKey()
+    var id: Int = 0,
     var prevOffset: Int?,
     var nextOffset: Int?
 )

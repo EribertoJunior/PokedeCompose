@@ -4,8 +4,8 @@ import com.example.pokedexcompose.data.dataBase.local.EvolutionChainDao
 import com.example.pokedexcompose.data.dataBase.local.PokemonDao
 import com.example.pokedexcompose.data.dataBase.local.PokemonDetailDao
 import com.example.pokedexcompose.data.dataBase.local.PokemonRemoteKeyDao
-import com.example.pokedexcompose.data.dataBase.local.PokemonSpeciesDao
-import com.example.pokedexcompose.data.dataBase.local.entities.EvolutionChain
+import com.example.pokedexcompose.data.dataBase.local.dao.PokemonSpeciesDao
+import com.example.pokedexcompose.data.dataBase.local.entities.EvolutionChainEntity
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonRemoteKey
 import com.example.pokedexcompose.data.model.local.PokemonAndDetail
 import io.mockk.clearAllMocks
@@ -117,7 +117,7 @@ class LocalDataSourceImplTest {
 
         runBlocking {
             val pokemonRemoteKeyByName =
-                localDataSourceImpl.getPokemonRemoteKeyByName("")
+                localDataSourceImpl.getPokemonRemoteKeyById("")
 
             assertEquals(pokemonRemoteKey, pokemonRemoteKeyByName)
         }
@@ -192,7 +192,7 @@ class LocalDataSourceImplTest {
     @Test
     fun `should return an Evolution Chain when pokemonRemoteKeyDao returns an Evolution Chain`() {
 
-        val pokemonRemoteKey = mockk<EvolutionChain>(relaxed = true)
+        val pokemonRemoteKey = mockk<EvolutionChainEntity>(relaxed = true)
 
         coEvery { evolutionChainDao.searchEvolutionChainById(any()) } answers { pokemonRemoteKey }
 

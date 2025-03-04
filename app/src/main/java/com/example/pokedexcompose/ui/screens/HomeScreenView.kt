@@ -20,16 +20,16 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
-import com.example.pokedexcompose.ui.viewmodels.HomeViewModel
-import com.example.pokedexcompose.data.model.local.PokemonAndDetail
-import com.example.pokedexcompose.samples.listPokemonSample
+import com.example.pokedexcompose.ui.viewmodels.PokemonViewModel
+import com.example.pokedexcompose.samples.pokemonSample
 import com.example.pokedexcompose.ui.components.LoadingAnimation
 import com.example.pokedexcompose.ui.components.PokemonItem
+import com.example.pokedexcompose.ui.model.PokemonUi
 import com.example.pokedexcompose.ui.theme.PokedexComposeTheme
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel, onClickPokemon: (PokemonAndDetail) -> Unit = {}) {
+fun HomeScreen(viewModel: PokemonViewModel, onClickPokemon: (Int) -> Unit = {}) {
     HomeScreenView(
         pokemonAndDetailLazyPagingItems = viewModel.uiState.collectAsLazyPagingItems(),
         onClickPokemon
@@ -38,8 +38,8 @@ fun HomeScreen(viewModel: HomeViewModel, onClickPokemon: (PokemonAndDetail) -> U
 
 @Composable
 fun HomeScreenView(
-    pokemonAndDetailLazyPagingItems: LazyPagingItems<PokemonAndDetail>,
-    onClickPokemon: (PokemonAndDetail) -> Unit = {}
+    pokemonAndDetailLazyPagingItems: LazyPagingItems<PokemonUi>,
+    onClickPokemon: (Int) -> Unit = {}
 ) {
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -53,11 +53,11 @@ fun HomeScreenView(
 
             items(
                 count = pokemonAndDetailLazyPagingItems.itemCount,
-                key = pokemonAndDetailLazyPagingItems.itemKey { it.pokemon.pokemonId }
+                key = pokemonAndDetailLazyPagingItems.itemKey { it.name }
             ) { index ->
                 pokemonAndDetailLazyPagingItems[index]?.let { pokemonAndDetail ->
                     PokemonItem(
-                        pokemonAndDetail = pokemonAndDetail,
+                        pokemonUiData = pokemonAndDetail,
                         onClickPokemon = onClickPokemon
                     )
                 }
@@ -100,7 +100,7 @@ fun PokemonListPreview() {
             HomeScreenView(
                 pokemonAndDetailLazyPagingItems = flowOf(
                     PagingData.from(
-                        listPokemonSample
+                        pokemonSample
                     )
                 ).collectAsLazyPagingItems()
             )

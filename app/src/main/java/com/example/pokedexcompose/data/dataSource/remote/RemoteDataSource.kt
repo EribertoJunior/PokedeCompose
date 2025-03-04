@@ -11,7 +11,7 @@ interface RemoteDataSource {
         offset: Int
     ): ListPokemonRemote
 
-    suspend fun getPokemonDetails(pokemonName: String) : PokemonDetailRemote
+    suspend fun getPokemonDetails(pokemonId: Int) : PokemonDetailRemote
 
     suspend fun searchPokemonSpecie(pokemonSpecieUrl: String): SpeciesRemote?
 

@@ -1,14 +1,5 @@
 package com.example.pokedexcompose.data.model.remote
 
-import com.example.pokedexcompose.data.dataBase.local.entities.Home
-import com.example.pokedexcompose.data.dataBase.local.entities.OfficialArtwork
-import com.example.pokedexcompose.data.dataBase.local.entities.Other
-import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetail
-import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetailSpecies
-import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetailStats
-import com.example.pokedexcompose.data.dataBase.local.entities.Sprites
-import com.example.pokedexcompose.data.dataBase.local.entities.Stat
-import com.example.pokedexcompose.data.model.local.enums.TypeColoursEnum
 import com.google.gson.annotations.SerializedName
 
 data class PokemonDetailRemote(

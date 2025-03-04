@@ -10,11 +10,12 @@ import com.example.pokedexcompose.data.dataSource.remote.RemoteDataSourceImpl
 import com.example.pokedexcompose.data.mapper.DataMapper
 import com.example.pokedexcompose.data.repository.DetailRepository
 import com.example.pokedexcompose.data.repository.DetailRepositoryImpl
-import com.example.pokedexcompose.data.repository.HomeRepository
-import com.example.pokedexcompose.data.repository.HomeRepositoryImpl
+import com.example.pokedexcompose.data.repository.PokemonRepository
+import com.example.pokedexcompose.data.repository.PokemonRepositoryImpl
 import com.example.pokedexcompose.data.repository.PokemonRemoteMediator
+import com.example.pokedexcompose.domain.usecase.GetPokemonListUseCase
 import com.example.pokedexcompose.ui.viewmodels.DetailsViewModel
-import com.example.pokedexcompose.ui.viewmodels.HomeViewModel
+import com.example.pokedexcompose.ui.viewmodels.PokemonViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -30,8 +31,8 @@ val modules = module {
 
     factory { PokemonPagingSource(get()) }
 
-    factory<HomeRepository> {
-        HomeRepositoryImpl(
+    factory<PokemonRepository> {
+        PokemonRepositoryImpl(
             pokemonRemoteMediator = get(),
             pokemonDao = get()
         )
@@ -64,11 +65,12 @@ val modules = module {
     factory {
         PokemonRemoteMediator(
             remoteDataSource = get(),
-            localDataSource = get(),
-            dataMapper = get()
+            localDataSource = get()
         )
     }
 
-    viewModel { HomeViewModel(repository = get()) }
+    factory { GetPokemonListUseCase(get()) }
+
+    viewModel { PokemonViewModel(getPokemonListUseCase = get()) }
     viewModel { DetailsViewModel(detailRepository = get()) }
 }

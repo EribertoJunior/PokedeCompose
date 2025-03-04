@@ -11,8 +11,8 @@ class RemoteDataSourceImpl(private val pokemonService: PokemonService) : RemoteD
         return pokemonService.getListPokemon(limit = limit, offset = offset)
     }
 
-    override suspend fun getPokemonDetails(pokemonName: String): PokemonDetailRemote {
-        return pokemonService.getPokemonDetails(pokemonName)
+    override suspend fun getPokemonDetails(pokemonId: Int): PokemonDetailRemote {
+        return pokemonService.getPokemonDetails(pokemonId)
     }
 
     override suspend fun searchPokemonSpecie(pokemonSpecieUrl: String): SpeciesRemote? {

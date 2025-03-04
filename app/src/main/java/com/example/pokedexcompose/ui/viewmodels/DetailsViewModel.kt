@@ -2,7 +2,7 @@ package com.example.pokedexcompose.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pokedexcompose.data.dataBase.local.entities.Pokemon
+import com.example.pokedexcompose.data.dataBase.local.entities.PokemonEntity
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetail
 import com.example.pokedexcompose.data.model.local.PokemonAndDetail
 import com.example.pokedexcompose.data.repository.DetailRepository
@@ -16,7 +16,7 @@ class DetailsViewModel(private val detailRepository: DetailRepository) : ViewMod
     private var _uiState: MutableStateFlow<PokemonAndDetail> =
         MutableStateFlow(
             PokemonAndDetail(
-                pokemon = Pokemon(),
+                pokemonEntity = PokemonEntity(),
                 pokemonDetail = PokemonDetail(),
                 specieAndEvolutionChain = null
             )

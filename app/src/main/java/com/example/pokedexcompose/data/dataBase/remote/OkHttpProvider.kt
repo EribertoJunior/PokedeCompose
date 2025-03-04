@@ -7,12 +7,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 object OkHttpProvider {
     private var okHttpClient: OkHttpClient? = null
-    private var interceptador = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    private var networkInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
     fun getOkHttpClient(context: Context? = null): OkHttpClient {
         return if (okHttpClient == null) {
             val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(interceptador)
+                .addInterceptor(networkInterceptor)
                 .cache(getMyCache(context))
                 .build()
 
