@@ -5,24 +5,31 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.pokedexcompose.data.dataBase.local.converters.ConverterPokemonDetailStats
-import com.example.pokedexcompose.data.dataBase.local.converters.ConverterSpecieToEvolution
-import com.example.pokedexcompose.data.dataBase.local.converters.ConverterTypeColoursEnum
-import com.example.pokedexcompose.data.dataBase.local.entities.EvolutionChain
-import com.example.pokedexcompose.data.dataBase.local.entities.Pokemon
+import com.example.pokedexcompose.data.dataBase.local.dao.EvolutionChainDao
+import com.example.pokedexcompose.data.dataBase.local.dao.PokemonDao
+import com.example.pokedexcompose.data.dataBase.local.dao.PokemonDetailDao
+import com.example.pokedexcompose.data.dataBase.local.dao.PokemonRemoteKeyDao
+import com.example.pokedexcompose.data.dataBase.local.dao.PokemonSpeciesDao
+import com.example.pokedexcompose.data.dataBase.local.typeconverters.ConverterPokemonDetailStats
+import com.example.pokedexcompose.data.dataBase.local.typeconverters.ConverterSpecieToEvolution
+import com.example.pokedexcompose.data.dataBase.local.typeconverters.ConverterTypeColoursEnum
+import com.example.pokedexcompose.data.dataBase.local.typeconverters.ListStringConverter
+import com.example.pokedexcompose.data.dataBase.local.entities.EvolutionChainEntity
+import com.example.pokedexcompose.data.dataBase.local.entities.PokemonEntity
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetail
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonRemoteKey
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonSpecies
 
 @Database(
-    entities = [Pokemon::class, EvolutionChain::class, PokemonDetail::class, PokemonRemoteKey::class, PokemonSpecies::class],
+    entities = [PokemonEntity::class, EvolutionChainEntity::class, PokemonDetail::class, PokemonRemoteKey::class, PokemonSpecies::class],
     version = 1,
     exportSchema = false
 )
 @TypeConverters(
     ConverterTypeColoursEnum::class,
     ConverterPokemonDetailStats::class,
-    ConverterSpecieToEvolution::class
+    ConverterSpecieToEvolution::class,
+    ListStringConverter::class
 )
 abstract class RoomConfig : RoomDatabase() {
 

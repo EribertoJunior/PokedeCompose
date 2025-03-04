@@ -4,8 +4,8 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.pokedexcompose.data.dataBase.local.converters.ConverterPokemonDetailStats
-import com.example.pokedexcompose.data.dataBase.local.converters.ConverterTypeColoursEnum
+import com.example.pokedexcompose.data.dataBase.local.typeconverters.ConverterPokemonDetailStats
+import com.example.pokedexcompose.data.dataBase.local.typeconverters.ConverterTypeColoursEnum
 import com.example.pokedexcompose.data.model.local.enums.TypeColoursEnum
 
 @Entity
