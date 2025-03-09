@@ -5,11 +5,15 @@ import androidx.paging.LoadType
 import androidx.paging.PagingConfig
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import com.example.pokedexcompose.data.dataSource.local.LocalDataSourceImpl
-import com.example.pokedexcompose.data.dataSource.remote.RemoteDataSourceImpl
+import com.example.pokedexcompose.details.data.dataSource.local.PokemonDetailLocalDataSourceImpl
+import com.example.pokedexcompose.details.data.dataSource.remote.PokemonDetailRemoteDataSourceImpl
 import com.example.pokedexcompose.data.model.local.PokemonAndDetail
 import com.example.pokedexcompose.data.model.remote.ListPokemonRemote
 import com.example.pokedexcompose.data.model.remote.PokemonDetailRemote
+import com.example.pokedexcompose.list.data.PokemonRemoteMediator
+import com.example.pokedexcompose.list.data.dataSource.local.PokemonListLocalDataSource
+import com.example.pokedexcompose.list.data.dataSource.remote.PokemonListRemoteDataSource
+import com.example.pokedexcompose.list.data.room.entities.PokemonEntity
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.spyk
@@ -20,14 +24,14 @@ import org.junit.Test
 @ExperimentalPagingApi
 internal class PokemonRemoteMediatorTest {
 
-    private val localDataSourceMock = mockk<LocalDataSourceImpl>()
-    private val remoteDataSourceMock = mockk<RemoteDataSourceImpl>()
+    private val localDataSourceMock = mockk<PokemonListLocalDataSource>()
+    private val remoteDataSourceMock = mockk<PokemonListRemoteDataSource>()
     private var response = mockk<ListPokemonRemote>()
     private val pokemonDetailMock = mockk<PokemonDetailRemote>(relaxed = true)
     private val remoteMediatorSpy = spyk(
         PokemonRemoteMediator(
-            localDataSource = localDataSourceMock,
-            remoteDataSource = remoteDataSourceMock
+            pokemonListLocalDataSource = localDataSourceMock,
+            pokemonListRemoteDataSource = remoteDataSourceMock
         )
     )
 
@@ -52,10 +56,7 @@ internal class PokemonRemoteMediatorTest {
         } answers { response }
         coEvery { remoteDataSourceMock.getPokemonDetails(any()) } answers { pokemonDetailMock }
 
-        coEvery { localDataSourceMock.saveAllPokemons(any()) } answers {}
         coEvery { localDataSourceMock.saveAllRemoteKey(any()) } answers {}
-        coEvery { localDataSourceMock.saveAllPokemonDetail(any()) } answers {}
-        coEvery { localDataSourceMock.saveAllPokemonSpecies(any()) } answers {}
 
         val result = runBlocking {
             remoteMediatorSpy.load(LoadType.REFRESH, getPagingState())
@@ -80,10 +81,7 @@ internal class PokemonRemoteMediatorTest {
             )
         } answers { response }
 
-        coEvery { localDataSourceMock.saveAllPokemonDetail(any()) } answers {}
-        coEvery { localDataSourceMock.saveAllPokemons(any()) } answers {}
         coEvery { localDataSourceMock.saveAllRemoteKey(any()) } answers {}
-        coEvery { localDataSourceMock.saveAllPokemonSpecies(any()) } answers {}
 
         val result = runBlocking {
             remoteMediatorSpy.load(LoadType.REFRESH, getPagingState())
@@ -107,7 +105,7 @@ internal class PokemonRemoteMediatorTest {
         assert(result is RemoteMediator.MediatorResult.Error)
     }
 
-    private fun getPagingState() = PagingState<Int, PokemonAndDetail>(
+    private fun getPagingState() = PagingState<Int, PokemonEntity>(
         pages = listOf(),
         anchorPosition = null,
         config = PagingConfig(10),

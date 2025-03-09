@@ -1,6 +1,7 @@
 package com.example.pokedexcompose.data.dataBase.local.typeconverters
 
-import com.example.pokedexcompose.data.model.local.enums.TypeColoursEnum
+import com.example.pokedexcompose.comum.ui.TypeColoursEnum
+import com.example.pokedexcompose.details.data.room.typeconverters.ConverterTypeColoursEnum
 import io.mockk.spyk
 import org.junit.Assert.*
 import org.junit.Test

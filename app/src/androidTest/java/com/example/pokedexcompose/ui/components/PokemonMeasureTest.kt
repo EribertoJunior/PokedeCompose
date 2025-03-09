@@ -6,7 +6,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.printToLog
 import com.example.pokedexcompose.R
-import com.example.pokedexcompose.extensions.toDoubleFormat
+import com.example.pokedexcompose.comum.extensions.toDoubleFormat
+import com.example.pokedexcompose.list.ui.screen.component.PokemonMeasure
 import org.junit.Rule
 import org.junit.Test
 

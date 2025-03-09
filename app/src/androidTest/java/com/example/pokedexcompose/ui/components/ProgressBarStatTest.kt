@@ -16,10 +16,11 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.printToLog
 import androidx.compose.ui.unit.dp
 import com.example.pokedexcompose.R
-import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetailStats
-import com.example.pokedexcompose.data.dataBase.local.entities.Stat
-import com.example.pokedexcompose.data.model.local.enums.TypeColoursEnum
-import com.example.pokedexcompose.extensions.color
+import com.example.pokedexcompose.details.data.room.entities.PokemonDetailStats
+import com.example.pokedexcompose.details.data.room.entities.Stat
+import com.example.pokedexcompose.comum.ui.TypeColoursEnum
+import com.example.pokedexcompose.comum.extensions.color
+import com.example.pokedexcompose.details.ui.screens.components.ProgressBarStat
 import com.example.pokedexcompose.ui.theme.PokedexComposeTheme
 import org.junit.Rule
 import org.junit.Test

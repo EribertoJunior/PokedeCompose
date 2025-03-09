@@ -4,10 +4,11 @@ import com.example.pokedexcompose.data.dataBase.local.EvolutionChainDao
 import com.example.pokedexcompose.data.dataBase.local.PokemonDao
 import com.example.pokedexcompose.data.dataBase.local.PokemonDetailDao
 import com.example.pokedexcompose.data.dataBase.local.PokemonRemoteKeyDao
-import com.example.pokedexcompose.data.dataBase.local.dao.PokemonSpeciesDao
+import com.example.pokedexcompose.details.data.room.dao.PokemonSpeciesDao
 import com.example.pokedexcompose.data.dataBase.local.entities.EvolutionChainEntity
 import com.example.pokedexcompose.data.dataBase.local.entities.PokemonRemoteKey
 import com.example.pokedexcompose.data.model.local.PokemonAndDetail
+import com.example.pokedexcompose.details.data.dataSource.local.PokemonDetailLocalDataSourceImpl
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -27,7 +28,7 @@ class LocalDataSourceImplTest {
     private lateinit var pokemonDetailDao: PokemonDetailDao
     private lateinit var pokemonSpeciesDao: PokemonSpeciesDao
     private lateinit var evolutionChainDao: EvolutionChainDao
-    private lateinit var localDataSourceImpl: LocalDataSourceImpl
+    private lateinit var localDataSourceImpl: PokemonDetailLocalDataSourceImpl
 
     @Before
     fun setUp() {
@@ -37,7 +38,7 @@ class LocalDataSourceImplTest {
         pokemonSpeciesDao = mockk()
         evolutionChainDao = mockk()
         localDataSourceImpl = spyk(
-            LocalDataSourceImpl(
+            PokemonDetailLocalDataSourceImpl(
                 pokemonDao = pokemonDao,
                 pokemonSpeciesDao = pokemonSpeciesDao,
                 pokemonDetailDao = pokemonDetailDao,
@@ -59,7 +60,7 @@ class LocalDataSourceImplTest {
         coEvery { pokemonDao.searchPokemonByName(any()) } answers { pokemonAndDetail }
 
         runBlocking {
-            val pokemonAndDetailFlow = localDataSourceImpl.searchPokemonByName("")
+            val pokemonAndDetailFlow = localDataSourceImpl.searchPokemonById("")
             assertEquals(pokemonAndDetail, pokemonAndDetailFlow)
         }
     }

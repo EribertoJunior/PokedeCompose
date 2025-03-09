@@ -5,7 +5,8 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.printToLog
-import com.example.pokedexcompose.data.model.local.enums.TypeColoursEnum
+import com.example.pokedexcompose.comum.ui.component.PokemonType
+import com.example.pokedexcompose.comum.ui.TypeColoursEnum
 import com.example.pokedexcompose.ui.theme.PokedexComposeTheme
 import org.junit.Rule
 import org.junit.Test

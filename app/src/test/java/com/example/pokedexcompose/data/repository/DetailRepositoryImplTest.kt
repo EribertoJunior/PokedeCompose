@@ -1,7 +1,17 @@
 package com.example.pokedexcompose.data.repository
 
-import com.example.pokedexcompose.data.dataSource.local.LocalDataSource
-import com.example.pokedexcompose.samples.pokemonSample
+import com.example.pokedexcompose.comum.ui.TypeColoursEnum
+import com.example.pokedexcompose.data.model.local.PokemonAndDetail
+import com.example.pokedexcompose.details.data.dataSource.local.PokemonDetailLocalDataSource
+import com.example.pokedexcompose.details.data.repository.DetailRepositoryImpl
+import com.example.pokedexcompose.details.data.room.entities.Home
+import com.example.pokedexcompose.details.data.room.entities.OfficialArtwork
+import com.example.pokedexcompose.details.data.room.entities.Other
+import com.example.pokedexcompose.details.data.room.entities.PokemonDetail
+import com.example.pokedexcompose.details.data.room.entities.PokemonDetailSpecies
+import com.example.pokedexcompose.details.data.room.entities.Sprites
+import com.example.pokedexcompose.list.data.room.entities.PokemonEntity
+import com.example.pokedexcompose.list.ui.samples.pokemonSample
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -16,13 +26,39 @@ import org.junit.Test
 
 class DetailRepositoryImplTest {
 
-    private lateinit var localDataSource: LocalDataSource
+    private lateinit var pokemonDetailLocalDataSource: PokemonDetailLocalDataSource
     private lateinit var detailRepositoryImpl: DetailRepositoryImpl
+    val pokemonAndDetail = PokemonAndDetail(
+        pokemonEntity = PokemonEntity(
+            id = 10,
+            name = "Teste",
+            imageUrl = ""
+        ),
+        pokemonDetail = PokemonDetail(
+            colorTypeList = listOf(
+                TypeColoursEnum.DRAGON,
+                TypeColoursEnum.FIGHTING
+            ),
+            sprites = Sprites(
+                Other(
+                    officialArtwork = OfficialArtwork(""),
+                    home = Home("")
+                )
+            ),
+            weight = 238,
+            height = 13,
+            stats = emptyList(),
+            species = PokemonDetailSpecies(
+                name = "",
+                url = ""
+            )
+        )
+    )
 
     @Before
     fun setUp() {
-        localDataSource = mockk()
-        detailRepositoryImpl = spyk(DetailRepositoryImpl(localDataSource))
+        pokemonDetailLocalDataSource = mockk()
+        detailRepositoryImpl = spyk(DetailRepositoryImpl(pokemonDetailLocalDataSource))
     }
 
     @After
@@ -32,16 +68,15 @@ class DetailRepositoryImplTest {
 
     @Test
     fun `should return a PokemonAndDetail when localDataSource returns a PokemonAndDetail`() {
-        val pokemonAndDetail = pokemonSample[0]
 
-        every { localDataSource.searchPokemonByName(any()) } answers {
+        every { pokemonDetailLocalDataSource.searchPokemonById(any()) } answers {
             flow {
                 emit(pokemonAndDetail)
             }
         }
 
         runBlocking {
-            val searchPokemonByName = detailRepositoryImpl.searchPokemonByName("")
+            val searchPokemonByName = detailRepositoryImpl.searchPokemonById(0)
 
             assertEquals(pokemonAndDetail, searchPokemonByName.first())
         }
@@ -49,7 +84,7 @@ class DetailRepositoryImplTest {
 
     @Test
     fun `should return NoSuchElementException when a PokemonAndDetail from localDataSource is not returned`() {
-        every { localDataSource.searchPokemonByName(any()) } answers {
+        every { pokemonDetailLocalDataSource.searchPokemonById(any()) } answers {
             flow {}
         }
         assertThrows(
@@ -57,7 +92,7 @@ class DetailRepositoryImplTest {
             NoSuchElementException::class.java
         ) {
             runBlocking {
-                val searchPokemonByName = detailRepositoryImpl.searchPokemonByName("")
+                val searchPokemonByName = detailRepositoryImpl.searchPokemonById(0)
                 searchPokemonByName.first()
             }
         }

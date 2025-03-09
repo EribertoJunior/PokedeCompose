@@ -1,7 +1,7 @@
 package com.example.pokedexcompose.data.model.remote
 
-import com.example.pokedexcompose.data.dataBase.local.entities.SpecieToEvolution
-import com.example.pokedexcompose.extensions.getUrlId
+import com.example.pokedexcompose.comum.extensions.getUrlId
+import com.example.pokedexcompose.list.data.room.entities.SpecieToEvolution
 import com.google.gson.annotations.SerializedName
 
 data class EvolutionChainRemote(

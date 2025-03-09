@@ -1,10 +1,11 @@
 package com.example.pokedexcompose.data.dataSource.remote
 
-import com.example.pokedexcompose.data.dataBase.remote.PokemonService
+import com.example.pokedexcompose.list.data.service.PokemonService
 import com.example.pokedexcompose.data.model.remote.EvolutionChainRemote
 import com.example.pokedexcompose.data.model.remote.ListPokemonRemote
 import com.example.pokedexcompose.data.model.remote.PokemonDetailRemote
 import com.example.pokedexcompose.data.model.remote.SpeciesRemote
+import com.example.pokedexcompose.details.data.dataSource.remote.PokemonDetailRemoteDataSourceImpl
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -17,13 +18,13 @@ import org.junit.Test
 
 class RemoteDataSourceImplTest {
 
-    private lateinit var remoteDataSourceImplMock: RemoteDataSourceImpl
+    private lateinit var remoteDataSourceImplMock: PokemonDetailRemoteDataSourceImpl
     private lateinit var pokemonService: PokemonService
 
     @Before
     fun setUp() {
         pokemonService = mockk()
-        remoteDataSourceImplMock = spyk(RemoteDataSourceImpl(pokemonService))
+        remoteDataSourceImplMock = spyk(PokemonDetailRemoteDataSourceImpl(pokemonService))
     }
 
     @After
@@ -52,7 +53,7 @@ class RemoteDataSourceImplTest {
         coEvery { pokemonService.getPokemonDetails(any()) } answers { pokemonDetailRemote }
 
         runBlocking {
-            val pokemonDetails = remoteDataSourceImplMock.getPokemonDetails("")
+            val pokemonDetails = remoteDataSourceImplMock.getPokemonDetails(0)
             assertEquals(pokemonDetailRemote, pokemonDetails)
         }
     }

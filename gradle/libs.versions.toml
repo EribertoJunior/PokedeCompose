@@ -1,5 +1,5 @@
 [versions]
-agp = "8.8.2"
+agp = "8.9.0"
 kotlin = "1.9.0"
 core-ktx = "1.13.1"
 junit = "4.13.2"
@@ -18,6 +18,7 @@ koin-android = "3.4.2"
 koin-android-compose = "3.4.5"
 ksp = "1.9.10-1.0.13"
 mockk = "1.13.2"
+lottie-compose = "6.3.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -50,6 +51,7 @@ androidx-room-testing = { group = "androidx.room", name = "room-testing", versio
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin-android" }
 koin-android-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin-android-compose" }
 io-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk"}
+lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie-compose" }
 
 [bundles]
 koin = [

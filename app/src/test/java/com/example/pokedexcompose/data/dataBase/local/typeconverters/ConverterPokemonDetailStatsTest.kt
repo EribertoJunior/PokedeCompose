@@ -1,7 +1,8 @@
 package com.example.pokedexcompose.data.dataBase.local.typeconverters
 
-import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetailStats
-import com.example.pokedexcompose.data.dataBase.local.entities.Stat
+import com.example.pokedexcompose.details.data.room.entities.PokemonDetailStats
+import com.example.pokedexcompose.details.data.room.entities.Stat
+import com.example.pokedexcompose.details.data.room.typeconverters.ConverterPokemonDetailStats
 import io.mockk.spyk
 import junit.framework.TestCase
 import org.junit.Assert.assertEquals

@@ -5,15 +5,9 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.printToLog
-import com.example.pokedexcompose.data.dataBase.local.entities.Home
-import com.example.pokedexcompose.data.dataBase.local.entities.OfficialArtwork
-import com.example.pokedexcompose.data.dataBase.local.entities.Other
-import com.example.pokedexcompose.data.dataBase.local.entities.PokemonEntity
-import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetail
-import com.example.pokedexcompose.data.dataBase.local.entities.PokemonDetailSpecies
-import com.example.pokedexcompose.data.dataBase.local.entities.Sprites
-import com.example.pokedexcompose.data.model.local.PokemonAndDetail
-import com.example.pokedexcompose.data.model.local.enums.TypeColoursEnum
+import com.example.pokedexcompose.comum.ui.TypeColoursEnum
+import com.example.pokedexcompose.list.ui.model.PokemonUi
+import com.example.pokedexcompose.list.ui.screen.component.PokemonItem
 import org.junit.Rule
 import org.junit.Test
 
@@ -22,38 +16,21 @@ class PokemonItemTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val pokemonEntityAndDetail get() = PokemonAndDetail(
-        pokemonEntity = PokemonEntity(
-            id = 10,
-            name = "Teste",
-            imageUrl = ""
-        ),
-        pokemonDetail = PokemonDetail(
-            colorTypeList = listOf(
-                TypeColoursEnum.DRAGON,
-                TypeColoursEnum.FIGHTING
-            ),
-            sprites = Sprites(
-                Other(
-                    officialArtwork = OfficialArtwork(""),
-                    home = Home("")
-                )
-            ),
-            weight = 238,
-            height = 13,
-            stats = emptyList(),
-            species = PokemonDetailSpecies(
-                name = "",
-                url = ""
-            )
-        ),
+    private val mockPokemonUi get() = PokemonUi(
+        id = 1,
+        idFormatted = "#001",
+        name = "Bulbassaur",
+        imageUrl = "https://example.com/pokemon2.png",
+        types = listOf(TypeColoursEnum.GRASS, TypeColoursEnum.POISON),
+        weight = 69,
+        height = 7
     )
 
     @Test
     fun pokemonItemTest_pokemonImage() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -68,7 +45,7 @@ class PokemonItemTest {
     fun pokemonItemTest_pokemonId() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -83,7 +60,7 @@ class PokemonItemTest {
     fun pokemonItemTest_pokemonName() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -98,7 +75,7 @@ class PokemonItemTest {
     fun pokemonItemTest_pokemonImageType() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -113,7 +90,7 @@ class PokemonItemTest {
     fun pokemonItemTest_secondPokemonImageType() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -128,7 +105,7 @@ class PokemonItemTest {
     fun pokemonItemTest_pokemonTypeName() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -143,7 +120,7 @@ class PokemonItemTest {
     fun pokemonItemTest_secondPokemonTypeName() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -158,7 +135,7 @@ class PokemonItemTest {
     fun pokemonItemTest_imageWeightInKilogram() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -173,7 +150,7 @@ class PokemonItemTest {
     fun pokemonItemTest_valueTextKilogram() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -188,7 +165,7 @@ class PokemonItemTest {
     fun pokemonItemTest_textWeight() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -203,7 +180,7 @@ class PokemonItemTest {
     fun pokemonItemTest_imageHeightInMeters() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -218,7 +195,7 @@ class PokemonItemTest {
     fun pokemonItemTest_valueTextHeight() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
@@ -233,7 +210,7 @@ class PokemonItemTest {
     fun pokemonItemTest_textHeight() {
         composeTestRule.setContent {
             PokemonItem(
-                pokemonUiData = pokemonEntityAndDetail
+                pokemonUiData = mockPokemonUi
             )
         }
 
