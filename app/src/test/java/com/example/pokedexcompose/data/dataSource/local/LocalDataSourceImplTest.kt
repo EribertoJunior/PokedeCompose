@@ -1,14 +1,14 @@
 package com.example.pokedexcompose.data.dataSource.local
 
-import com.example.pokedexcompose.data.dataBase.local.EvolutionChainDao
-import com.example.pokedexcompose.data.dataBase.local.PokemonDao
-import com.example.pokedexcompose.data.dataBase.local.PokemonDetailDao
-import com.example.pokedexcompose.data.dataBase.local.PokemonRemoteKeyDao
 import com.example.pokedexcompose.details.data.room.dao.PokemonSpeciesDao
-import com.example.pokedexcompose.data.dataBase.local.entities.EvolutionChainEntity
-import com.example.pokedexcompose.data.dataBase.local.entities.PokemonRemoteKey
 import com.example.pokedexcompose.data.model.local.PokemonAndDetail
 import com.example.pokedexcompose.details.data.dataSource.local.PokemonDetailLocalDataSourceImpl
+import com.example.pokedexcompose.details.data.room.dao.EvolutionChainDao
+import com.example.pokedexcompose.details.data.room.dao.PokemonDetailDao
+import com.example.pokedexcompose.details.data.room.entities.EvolutionChainEntity
+import com.example.pokedexcompose.list.data.room.dao.PokemonDao
+import com.example.pokedexcompose.list.data.room.dao.PokemonRemoteKeyDao
+import com.example.pokedexcompose.list.data.room.entities.PokemonRemoteKeyEntity
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -57,10 +57,10 @@ class LocalDataSourceImplTest {
     fun `must return a Flow of PokemonAndDetail when pokemonDao returns a Flow of PokemonAndDetail`() {
         val pokemonAndDetail = flow<PokemonAndDetail> { emit(mockk(relaxed = true)) }
 
-        coEvery { pokemonDao.searchPokemonByName(any()) } answers { pokemonAndDetail }
+        coEvery { pokemonDao.searchPokemonById(any()) } answers { pokemonAndDetail }
 
         runBlocking {
-            val pokemonAndDetailFlow = localDataSourceImpl.searchPokemonById("")
+            val pokemonAndDetailFlow = localDataSourceImpl.searchPokemonById(0)
             assertEquals(pokemonAndDetail, pokemonAndDetailFlow)
         }
     }
@@ -79,11 +79,11 @@ class LocalDataSourceImplTest {
     @Test
     fun `must save a list of pokemons`() {
 
-        coEvery { pokemonDao.saveAll(any()) } answers {}
+        coEvery { pokemonDao.insertAll(any()) } answers {}
 
         runBlocking {
             localDataSourceImpl.saveAllPokemons(mockk(relaxed = true))
-            coVerify { pokemonDao.saveAll(any()) }
+            coVerify { pokemonDao.insertAll(any()) }
         }
     }
 
@@ -101,24 +101,24 @@ class LocalDataSourceImplTest {
     @Test
     fun `must save a list of RemoteKey`() {
 
-        coEvery { pokemonRemoteKeyDao.saveAll(any()) } answers {}
+        coEvery { pokemonRemoteKeyDao.insertAll(any()) } answers {}
 
         runBlocking {
             localDataSourceImpl.saveAllRemoteKey(mockk(relaxed = true))
-            coVerify { pokemonRemoteKeyDao.saveAll(any()) }
+            coVerify { pokemonRemoteKeyDao.insertAll(any()) }
         }
     }
 
     @Test
     fun `should return a PokemonRemoteKey when pokemonRemoteKeyDao returns a PokemonRemoteKey`() {
 
-        val pokemonRemoteKey = mockk<PokemonRemoteKey>(relaxed = true)
+        val pokemonRemoteKey = mockk<PokemonRemoteKeyEntity>(relaxed = true)
 
-        coEvery { pokemonRemoteKeyDao.getPokemonRemoteKeyFromName(any()) } answers { pokemonRemoteKey }
+        coEvery { pokemonRemoteKeyDao.getRemoteKeyByPokemonId(any()) } answers { pokemonRemoteKey }
 
         runBlocking {
             val pokemonRemoteKeyByName =
-                localDataSourceImpl.getPokemonRemoteKeyById("")
+                localDataSourceImpl.getPokemonRemoteKeyById(0)
 
             assertEquals(pokemonRemoteKey, pokemonRemoteKeyByName)
         }
